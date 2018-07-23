@@ -14,34 +14,36 @@ namespace WcfFaultContract
     {
 
         [OperationContract]
-        string GetData(int value);
-
+        int Add(int n1, int n2);
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
+        int Subtract(int n1, int n2);
+        [OperationContract]
+        int Multiply(int n1, int n2);
+        [OperationContract]
+        [FaultContract(typeof(MathFault))]
+        int Divide(int n1, int n2);
     }
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
-    public class CompositeType
+    public class MathFault
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
+        private string operation;
+        private string problemType;
 
         [DataMember]
-        public bool BoolValue
+        public string Operation
         {
-            get { return boolValue; }
-            set { boolValue = value; }
+            get { return operation; }
+            set { operation = value; }
         }
 
         [DataMember]
-        public string StringValue
+        public string ProblemType
         {
-            get { return stringValue; }
-            set { stringValue = value; }
+            get { return problemType; }
+            set { problemType = value; }
         }
     }
 }

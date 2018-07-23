@@ -12,22 +12,36 @@ namespace WcfFaultContract
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+        public int Add(int n1, int n2)
         {
-            return string.Format("You entered: {0}", value);
+            throw new NotImplementedException();
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public int Divide(int n1, int n2)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return n1 / n2;
+
+            //try
+            //{
+            //    return n1 / n2;
+            //}
+            //catch (DivideByZeroException)
+            //{
+            //    MathFault mf = new MathFault();
+            //    mf.Operation = "division";
+            //    mf.ProblemType = "divide by zero";
+            //    throw new FaultException<MathFault>(mf);
+            //}
+        }
+
+        public int Multiply(int n1, int n2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Subtract(int n1, int n2)
+        {
+            throw new NotImplementedException();
         }
     }
 }
